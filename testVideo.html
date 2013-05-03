@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+
+    <script type="text/javascript" src="jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+
+        function onLoad(){
+            alert($("#myvideo").canPlayType("video/mp4"))
+        }
+
+        /*
+        -------- method
+         play()
+         pause()
+         load()
+         canPlayType
+         -------- property
+         currentSrc
+         currentTime
+         videoWidth
+         videoHeight
+         duration
+         ended
+         error
+         paused
+         muted
+         seeking
+         volume
+         height
+         width
+        -------- event
+         play
+         pause
+         progress
+         error
+         timeupdate
+         ended
+         abort
+         empty
+         emptied
+         waiting
+         loadedmetadata
+        */
+
+        function onVideoEvent(event)
+        {
+            var m = $("#msg");
+            var v = $("#myvideo")[0];
+            switch(event.type)
+            {
+                case "loadedmetadata":
+                    m.append(event.type + " : " + v.currentSrc) ;
+//                    var flag = v.canPlayType("video/mp4");
+//                    m.append("\ncan play type mp4" + " : " + flag) ;
+                    break;
+                case "play":
+                    m.append(event.type + " : " + v.play) ;
+                    break;
+                case "timeupdate":
+                    m.append(event.type + " : " + v.currentTime) ;
+                    break;
+            }
+            m.append("\n") ;
+            m.scroll(m.scrollWidth);
+        }
+    </script>
+
+</head>
+<body onload="onLoad()">
+    <p/>
+    <div style="width:100%; height: 100%">
+        <div style="width:320px; height: 240px; float: left">
+            <video id="myvideo" width="320" height="240" controls="controls"
+                   poster="r1.jpg"
+                    ontimeupdate="onVideoEvent(event)" onplay="onVideoEvent(event)" onpause="onVideoEvent(event)"
+                    onprogress="onVideoEvent(event)" onerror="onVideoEvent(event)" onended="onVideoEvent(event)"
+                    onaborts="onVideoEvent(event)" onempty="onVideoEvent(event)" onemptied="onVideoEvent(event)"
+                    onwaiting="onVideoEvent(event)" onloadedmetadata="onVideoEvent(event)">
+                <source src="r1.mp4"/>
+                <source src="r1.ogv"/>
+                <source src="r1.webm"/>
+                no
+            </video>
+            <div id="subtitle" style="width: 320px; height: 50px; border: solid; color: red; position: relative; top:-90px"></div>
+        </div>
+        <div style="float:left; width: 100px; height: 500px; padding-left: 30px">
+            <textarea id="msg" style="widows: 100%; height: 100%"></textarea>
+        </div>
+    </div>
+</body>
+</html>

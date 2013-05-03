@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="jquery-1.9.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btnClick").click(function(){
+                $("#div1").animate({fontSize:"3em",width:"200px",left:"200px"},2000,function(){alert("finished")});
+            });
+            
+            $("#btnStop").click(function(){
+                $("#div1").stop(false, false);
+            });
+
+            $("#btnCSS").click(function(){
+                alert("before:" + $("#div1").css("background-color"));
+                $("#div1").css("background-color", "yellow");
+                alert("after:" + $("#div1").css("background-color"));
+            });
+
+            $("#btnLoad").click(function(){
+                $("#div2").load("testVideo.html");
+            });
+        });
+    </script>
+</head>
+
+<body>
+<button id="btnClick">click</button>
+<button id="btnStop">stop</button>
+<button id="btnCSS">CSS</button>
+<button id="btnLoad">load</button>
+<br><br>
+<div id="div1" style="width:80px;height:80px;position:absolute">the div</div>
+<br>
+<div id="div2" style="width:80px;height:80px;background-color:green;"></div>
+<br>
+<div id="div3" style="width:80px;height:80px;background-color:blue;"></div>
+</body>
+</html>
